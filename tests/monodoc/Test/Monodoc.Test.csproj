@@ -1,12 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  
   <PropertyGroup>
-    <TargetFramework>net471</TargetFramework>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <TargetFrameworks>net6.0;net471</TargetFrameworks>
+    <NoWarn>$(NoWarn);NUnit2005;NUnit2007;NUnit1032;NUnit2048;NUnit2049</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(NuGetVersionMicrosoftNETTestSdk)" />
     <PackageReference Include="NUnit" Version="$(NuGetVersionNUnit)" />
+    <PackageReference Include="NUnit3TestAdapter" Version="$(NuGetVersionNUnit3TestAdapter)" />
+    <PackageReference Include="NUnit.Analyzers" Version="$(NuGetVersionNUnitAnalyzers)" />
+    <PackageReference Include="coverlet.collector" Version="$(NuGetVersionCoverletCollector)" />
   </ItemGroup>
 
   <ItemGroup>
@@ -14,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+    <Content Include="..\..\..\monodoc\monodoc.dll.config" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
+
 </Project>

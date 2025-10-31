@@ -1,24 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <TargetFramework>net471</TargetFramework>
-    <OutputType>Library</OutputType>
+    <TargetFrameworks>net6.0;net471</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <LangVersion>preview</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <OutputPath>bin\Release</OutputPath>
-    <LangVersion>preview</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup>
-    <RunPostBuildEvent>Always</RunPostBuildEvent>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>preview</LangVersion>
+    <NoWarn>$(NoWarn);NUnit2005;NUnit2007;NUnit1032;NUnit2048;NUnit2049</NoWarn>
   </PropertyGroup>
-  <ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net471'">
     <Reference Include="mdoc.Test.Cplusplus, Version=1.0.6709.28740, Culture=neutral, processorArchitecture=x64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\external\Test\mdoc.Test.Cplusplus.dll</HintPath>
@@ -37,25 +27,26 @@
       <HintPath>..\..\..\external\Windows\Windows.Foundation.UniversalApiContract.winmd</HintPath>
     </Reference>
   </ItemGroup>
+
   <ItemGroup>
+    <PackageReference Include="NUnit.Analyzers" Version="$(NuGetVersionNUnitAnalyzers)" />
+    <PackageReference Include="coverlet.collector" Version="$(NuGetVersionCoverletCollector)" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(NuGetVersionMicrosoftNETTestSdk)" />
     <PackageReference Include="Mono.Cecil" Version="$(NuGetVersionMonoCecil)" />
     <PackageReference Include="NUnit" Version="$(NuGetVersionNUnit)" />
-	<PackageReference Include="NUnit3TestAdapter" Version="$(NuGetVersionNUnit3TestAdapter)" />
+    <PackageReference Include="NUnit3TestAdapter" Version="$(NuGetVersionNUnit3TestAdapter)" />
   </ItemGroup>
-  <ItemGroup>
-    <None Update="..\cppcli\cppcli\cppcli.h">
-      <Link>SampleClasses\cppcli.h</Link>
-    </None>
-  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\..\monodoc\monodoc.csproj" />
     <ProjectReference Include="..\..\..\mdoc\mdoc.csproj" />
     <ProjectReference Include="..\mdoc.Test.FSharp\mdoc.Test.FSharp.fsproj" />
   </ItemGroup>
+
   <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Update="..\cppcli\cppcli\cppcli.h">
+      <Link>SampleClasses\cppcli.h</Link>
+    </None>
     <Content Include="..\cppcli\Debug\cppcli.dll">
       <Link>SampleClasses\cppcli.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -81,8 +72,10 @@
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
   </ItemGroup>
+
   <ItemGroup>
     <Compile Remove="mdoc.Test.NullableReferenceTypes\**\*" />
     <Compile Remove="UWPTestComponentCSharp\**\*" />
   </ItemGroup>
+
 </Project>

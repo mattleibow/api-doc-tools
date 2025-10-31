@@ -58,9 +58,6 @@ endif
 cleanup:
 	-rm -Rf ../tests/mdoc/Test/en.actual ../tests/mdoc/Test/html.actual
 
-nunit: 
-	$(MONO) ../packages/NUnit.ConsoleRunner.3.6.0/tools/nunit3-console.exe ../tests/mdoc/mdoc.Test/bin/$(CONFIGURATION)/mdoc.Test.dll
-
 ifeq ($(filter Windows_NT,$(OS)),)
 
 ../tests/mdoc/Test/DocTest-VB-Eii.dll:

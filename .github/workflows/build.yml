@@ -29,8 +29,14 @@ jobs:
       with:
         dotnet-version: '6.x'
 
-    - name: Build and pack
-      run: make prepare build nuget CONFIGURATION=${{ matrix.configuration }}
+    - name: Restore dependencies
+      run: dotnet restore apidoctools.sln
+
+    - name: Build
+      run: dotnet build apidoctools.sln -c ${{ matrix.configuration }} --no-restore
+
+    - name: Pack
+      run: nuget pack mdoc/mdoc.nuspec -outputdirectory bin/Nuget
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
